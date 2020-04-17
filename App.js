@@ -23,7 +23,6 @@ import Home from './src/Screens/Home/Home'
 import MyProfile from './src/Screens/MyProfile/MyProfile'
 import Search from './src/Screens/Search/Search'
 import Feed from './src/Screens/Feeds/Feed'
-import { set } from 'react-native-reanimated';
 
 const HomeStack = createStackNavigator();
 const SearchStack = createStackNavigator();
