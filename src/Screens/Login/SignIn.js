@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
-
+import {inject, observer} from "mobx-react"
+@inject('LoginStore')
+@observer
 export default class SignIn extends Component {
   
   render() {
@@ -13,7 +15,7 @@ export default class SignIn extends Component {
           padding: 20
         }}
       >
-        <Text onPress={()=>{}}>SignIn</Text>
+        <Text onPress={()=>{this.props.LoginStore.tokenFunction('jkasjdkajkdjkaj')}}>SignIn</Text>
       </View>
     );
   }

@@ -6,10 +6,14 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useState} from 'react';
+import { Provider, observer } from 'mobx-react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+// STORE IMPORTED
+import LoginStore from './src/Store/LoginStore'
 
 // COMPONENTS IMPORTED 
 import SignIn from './src/Screens/Login/SignIn'
@@ -19,6 +23,7 @@ import Home from './src/Screens/Home/Home'
 import MyProfile from './src/Screens/MyProfile/MyProfile'
 import Search from './src/Screens/Search/Search'
 import Feed from './src/Screens/Feeds/Feed'
+import { set } from 'react-native-reanimated';
 
 const HomeStack = createStackNavigator();
 const SearchStack = createStackNavigator();
@@ -26,11 +31,15 @@ const FeedStack = createStackNavigator();
 const ProfileStack = createStackNavigator(); 
 const LoginStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-const token = 'ookskfhjkshdjfdsjhf'
+
+const stores = {
+  LoginStore
+}
+
 function Login_Stack(){
   return (
      <LoginStack.Navigator>
-      <LoginStack.Screen name="SignIn" component={SignIn} />
+      <LoginStack.Screen name="SignIn" component={SignIn}  />
       <LoginStack.Screen name="SignUp" component={SignUp} />
       <LoginStack.Screen name="Forgot" component={ForgotPassword} />
     </LoginStack.Navigator>
@@ -77,16 +86,19 @@ function TabScreen() {
   );
 }
 
-
 function App() {
+  const [token, setToken] = useState()
+  LoginStore.setTokenFunction(setToken)
   return (
-     <NavigationContainer>
-       {false?
-        <TabScreen/>
-        :
-        <Login_Stack/>
-       }
-    </NavigationContainer>
+    <Provider {...stores}>
+      <NavigationContainer>
+        {token?
+          <TabScreen/>
+          :
+          <Login_Stack/>
+        }
+      </NavigationContainer>
+    </Provider>
   );
 }
 
