@@ -110,9 +110,9 @@ export default class Home extends Component {
         colors={['#ffffff', '#d26e23']}
         style={styles.categoryListItem}>
         <View>
-          <Text 
-           numberOfLines={1}
-          style={{fontSize: 18, fontWeight: 'bold'}}>{item.type}</Text>
+          <Text numberOfLines={1} style={{fontSize: 18, fontWeight: 'bold'}}>
+            {item.type}
+          </Text>
         </View>
       </LinearGradient>
     );
